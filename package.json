@@ -1,0 +1,20 @@
+{
+  "name": "cricket-predictions",
+  "version": "1.0.0",
+  "description": "Cricket Predictions App with Netlify Functions",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "dev": "netlify dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["cricket", "predictions", "netlify", "serverless"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.15.2"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+} 
