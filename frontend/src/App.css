@@ -1,0 +1,642 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-container {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 20px;
+}
+
+.form-container h2 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.prediction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2E8B57;
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.edit-note {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.submit-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%);
+  color: white;
+  width: 100%;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 139, 87, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.predictions-container {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.predictions-container h2 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.no-predictions {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+  font-size: 1.1rem;
+}
+
+.predictions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.prediction-card {
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafbfc;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prediction-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.compact-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.twitter-handle {
+  font-weight: 600;
+  color: #1da1f2;
+  font-size: 1.2rem;
+}
+
+.series-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #2E8B57;
+  font-size: 1rem;
+}
+
+.series-result strong {
+  color: #2E8B57;
+}
+
+.outcome-badge {
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.expand-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c757d;
+  color: white;
+}
+
+.expand-btn:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+.expanded-details {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #e1e5e9;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.series-result-detail {
+  margin-bottom: 20px;
+}
+
+.other-predictions h4 {
+  color: #2E8B57;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.predictions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prediction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #2E8B57;
+}
+
+.prediction-field {
+  flex: 1;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.prediction-field strong {
+  color: #2E8B57;
+  margin-right: 8px;
+}
+
+.outcome-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.outcome {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  min-width: 80px;
+  text-align: center;
+}
+
+.outcome-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.outcome-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  min-width: 30px;
+}
+
+.outcome-btn:hover {
+  transform: scale(1.1);
+}
+
+.outcome-btn.correct {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.outcome-btn.incorrect {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.created-at {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e1e5e9;
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.submit-btn:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* MOBILE-FIRST RESPONSIVE DESIGN */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .form-container {
+    position: static;
+    order: 1;
+  }
+  
+  .predictions-container {
+    order: 2;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header p {
+    font-size: 1.1rem;
+  }
+  
+  .form-container,
+  .predictions-container {
+    padding: 20px;
+  }
+  
+  .prediction-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  
+  .card-actions {
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .expand-btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+  
+  .series-result {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+  }
+  
+  .outcome-badge {
+    margin-left: 0;
+    align-self: flex-start;
+    font-size: 1.5rem;
+  }
+  
+  .prediction-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+  }
+  
+  .outcome-section {
+    align-self: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .outcome-buttons {
+    gap: 8px;
+  }
+  
+  .outcome-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-width: 60px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+  
+  .header p {
+    font-size: 1rem;
+  }
+  
+  .main {
+    gap: 15px;
+  }
+  
+  .form-container,
+  .predictions-container {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .form-container h2,
+  .predictions-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .prediction-form {
+    gap: 15px;
+  }
+  
+  .form-group input {
+    padding: 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .submit-btn {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  .twitter-handle {
+    font-size: 1.1rem;
+  }
+  
+  .series-result {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+  
+  .series-result strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .outcome-badge {
+    font-size: 1.3rem;
+    margin-top: 5px;
+  }
+  
+  .expand-btn {
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  
+  .prediction-item {
+    padding: 12px;
+    border-radius: 6px;
+  }
+  
+  .prediction-field {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .prediction-field strong {
+    display: block;
+    margin-bottom: 3px;
+    margin-right: 0;
+  }
+  
+  .outcome {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    min-width: 70px;
+  }
+  
+  .outcome-buttons {
+    gap: 6px;
+  }
+  
+  .outcome-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    min-width: 50px;
+  }
+  
+  .other-predictions h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .created-at {
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+  .no-predictions {
+    padding: 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .app {
+    padding: 8px;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .form-container,
+  .predictions-container {
+    padding: 12px;
+  }
+  
+  .prediction-card {
+    padding: 15px;
+  }
+  
+  .series-result {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .prediction-field {
+    font-size: 0.85rem;
+  }
+  
+  .outcome-btn {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    min-width: 45px;
+  }
+}
